@@ -31,7 +31,7 @@ const Register: React.FC = () => {
   return (
     <div className="login-container" style={{ marginTop: "50px" }}>
       <h2 style={{ textAlign: "center", marginBottom: "1.5rem" }}>Register</h2>
-      
+
       {error && <div className="error-message">{error}</div>}
 
       <form onSubmit={handleSubmit}>
