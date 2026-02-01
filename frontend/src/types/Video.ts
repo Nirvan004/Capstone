@@ -9,3 +9,12 @@ export interface Video {
   createdAt: string
   updatedAt: string
 }
+export interface VideoCreateData {
+  title: string
+  description?: string
+}
+
+export interface VideoUpdateData {
+  title?: string
+  description?: string
+}

@@ -9,3 +9,15 @@ export interface Todo {
   createdAt: string
   updatedAt: string
 }
+export interface TodoCreateData {
+  title: string;
+  description?: string;
+  status: TodoStatus;
+  video: string;
+}
+
+export interface TodoUpdateData {
+  title?: string;
+  description?: string;
+  status?: TodoStatus;
+}
