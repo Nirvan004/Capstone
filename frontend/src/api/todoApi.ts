@@ -7,7 +7,7 @@ export async function getTodos(videoId: string): Promise<Todo[]> {
 }
 
 export async function createTodo(data: TodoCreateData): Promise<Todo> {
-  const res = await apiClient.post<Todo>('/todos', data)
+  const res = await apiClient.post<Todo>(`/videos/${data.video}/todos`, data)
   return res.data
 }
 
