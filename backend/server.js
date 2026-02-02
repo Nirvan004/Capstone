@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
-app.use("/api", todoRoutes);
+app.use("/api/todo", todoRoutes);
 
 // Catch all for unmatched routes
 app.use((req, res) => {
