@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getVideos } from "../api/videoApi";
 import type { Video } from "../types/Video";
+import CreateVideoForm from "../components/CreateVideoForm";
 
 const Dashboard: React.FC = () => {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -26,6 +27,11 @@ const Dashboard: React.FC = () => {
   return (
     <div className="dashboard-container">
       <h2 style={{ textAlign: "center", marginBottom: "2rem" }}>Your Videos</h2>
+      <CreateVideoForm
+        onVideoCreated={(video) =>
+          setVideos((prev) => [video, ...prev])
+        }
+      />
       <div className="video-grid">
         {videos.map((video) => (
           <Link key={video._id} to={`/videos/${video._id}`} style={{ textDecoration: "none" }}>

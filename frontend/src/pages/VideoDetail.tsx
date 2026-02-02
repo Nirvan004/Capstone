@@ -4,6 +4,7 @@ import { getTodos } from "../api/todoApi";
 import type { Video } from "../types/Video";
 import type { Todo } from "../types/Todo";
 import TodoItem from "../components/TodoItem";
+import CreateTodoForm from "../components/CreateTodoForm";
 
 const VideoDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -43,6 +44,13 @@ const VideoDetail: React.FC = () => {
     <div className="dashboard-container">
       <h2 style={{ textAlign: "center", marginBottom: "1rem" }}>{video.title}</h2>
       {video.description && <p style={{ textAlign: "center", marginBottom: "2rem" }}>{video.description}</p>}
+
+      <CreateTodoForm
+        videoId={video._id}
+        onTodoCreated={(todo) =>
+          setTodos((prev) => [todo, ...prev])
+        }
+      />
 
       <h3>Todos</h3>
       {todos.length === 0 ? (
