@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getTodos } from "../api/todoApi";
 import type { Video } from "../types/Video";
 import type { Todo } from "../types/Todo";
+import TodoItem from "../components/TodoItem";
 
 const VideoDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -48,12 +49,8 @@ const VideoDetail: React.FC = () => {
         <p>No todos yet.</p>
       ) : (
         <div className="video-grid">
-          {todos.map((todo) => (
-            <div key={todo._id} className="video-card">
-              <h4>{todo.title}</h4>
-              {todo.description && <p>{todo.description}</p>}
-              <p>Status: {todo.status}</p>
-            </div>
+          {todos.map(todo => (
+            <TodoItem key={todo._id} todo={todo} />
           ))}
         </div>
       )}
