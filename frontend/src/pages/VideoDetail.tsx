@@ -18,7 +18,7 @@ const VideoDetail: React.FC = () => {
       setError(null);
 
       try {
-        const res = await fetch(`http://localhost:8008/api/videos/${id}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/videos/${id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

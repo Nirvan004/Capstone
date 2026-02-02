@@ -5,7 +5,9 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import VideoDetail from "./pages/VideoDetail";
 import { useAuth } from "./context/AuthContext";
+import Navbar from "./components/Navbar";
 import './App.css';
+
 
 const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const { user } = useAuth();
@@ -16,6 +18,7 @@ const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
 const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
