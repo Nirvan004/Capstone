@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 
@@ -66,6 +66,9 @@ const Register: React.FC = () => {
           {loading ? "Registering..." : "Register"}
         </button>
       </form>
+      <p style={{ textAlign: "center", marginTop: "1rem" }}>
+        <Link to="/login">Login here</Link>
+      </p>
     </div>
   );
 };
