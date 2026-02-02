@@ -58,7 +58,11 @@ const VideoDetail: React.FC = () => {
       ) : (
         <div className="video-grid">
           {todos.map(todo => (
-            <TodoItem key={todo._id} todo={todo} />
+            <TodoItem key={todo._id} todo={todo}
+              onTodoUpdated={(updated) =>
+                setTodos(prev => prev.map(t => (t._id === updated._id ? updated : t)))
+              }
+            />
           ))}
         </div>
       )}
