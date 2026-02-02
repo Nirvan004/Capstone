@@ -2,7 +2,7 @@ import apiClient from './apiClient'
 import type { Todo, TodoCreateData, TodoUpdateData } from '../types/Todo'
 
 export async function getTodos(videoId: string): Promise<Todo[]> {
-  const res = await apiClient.get<Todo[]>(`/todos/${videoId}`)
+  const res = await apiClient.get<Todo[]>(`/videos/${videoId}/todos`)
   return res.data
 }
 
