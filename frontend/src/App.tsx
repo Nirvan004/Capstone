@@ -5,7 +5,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import VideoDetail from "./pages/VideoDetail";
 import { useAuth } from "./context/AuthContext";
-import './app.css';
+import './App.css';
 
 const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const { user } = useAuth();
