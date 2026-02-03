@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getTodos } from "../api/todoApi";
+import { deleteTodo, getTodos } from "../api/todoApi";
 import type { Video } from "../types/Video";
 import type { Todo } from "../types/Todo";
 import TodoItem from "../components/TodoItem";
@@ -37,6 +37,17 @@ const VideoDetail: React.FC = () => {
     fetchVideoAndTodos();
   }, [id]);
 
+  const handleDeleteTodo = async (todoId: string) => {
+    const confirmed = window.confirm("Are you sure you want to delete this todo? This cannot be undone.");
+    if (!confirmed) return;
+    try {
+      await deleteTodo(todoId);
+      setTodos(prev => prev.filter(t => t._id !== todoId));
+    } catch (err: any) {
+      alert(err.response?.data?.message || "Failed to delete todo");
+    }
+  };
+
   if (error) return <div className="error-message">{error}</div>;
   if (!video) return <div className="error-message">No videos found.</div>;
 
@@ -62,6 +73,7 @@ const VideoDetail: React.FC = () => {
               onTodoUpdated={(updated) =>
                 setTodos(prev => prev.map(t => (t._id === updated._id ? updated : t)))
               }
+              onDelete={() => handleDeleteTodo(todo._id)}
             />
           ))}
         </div>

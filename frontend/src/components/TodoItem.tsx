@@ -5,9 +5,10 @@ import { updateTodo } from "../api/todoApi";
 interface Props {
   todo: Todo;
   onTodoUpdated: (updated: Todo) => void;
+  onDelete: () => void;
 }
 
-const TodoItem: React.FC<Props> = ({ todo, onTodoUpdated }) => {
+const TodoItem: React.FC<Props> = ({ todo, onTodoUpdated, onDelete }) => {
   const [status, setStatus] = useState(todo.status);
   const [loading, setLoading] = useState(false);
 
@@ -37,6 +38,15 @@ const TodoItem: React.FC<Props> = ({ todo, onTodoUpdated }) => {
           <option value="Done">Done</option>
         </select>
       </p>
+      <button 
+        onClick={(e)=>{
+          e.stopPropagation();
+          onDelete();
+        }}
+        style={{ backgroundColor: "red", color: "white", padding: "0.25rem", borderRadius: "4px" }}
+        >
+        Delete
+        </button>
     </div>
   );
 };
