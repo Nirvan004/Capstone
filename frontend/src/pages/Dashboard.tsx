@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getVideos, deleteVideo } from "../api/videoApi";
+import { getVideos, deleteVideo, updateVideo} from "../api/videoApi";
 import type { Video } from "../types/Video";
 import CreateVideoForm from "../components/CreateVideoForm";
 import VideoCard from "../components/VideoCard";
@@ -44,30 +44,44 @@ const Dashboard: React.FC = () => {
   }
 };
 
-  if (error) return <div className="error-message">{error}</div>;
+const handleUpdateVideo = async (updatedVideo: Video) => {
+  try {
+    const savedVideo = await updateVideo(updatedVideo._id, {
+      title: updatedVideo.title,
+      description: updatedVideo.description,
+    });
+    setVideos((prev) =>
+      prev.map((v) => (v._id === savedVideo._id ? savedVideo : v))
+    );
+  } catch (err: any) {
+    alert(err.response?.data?.message || "Failed to update video");
+  }
+};
 
+
+  if (error) return <div className="error-message">{error}</div>;
+  
   return (
     <div className="dashboard-container">
       <h2 style={{ textAlign: "center", marginBottom: "2rem" }}>Your Videos</h2>
+
       <CreateVideoForm
-        onVideoCreated={(video) =>
-          setVideos((prev) => [video, ...prev])
-        }
+        onVideoCreated={(video) => setVideos((prev) => [video, ...prev])}
       />
+
       <div className="video-grid">
         {videos.map((video) => (
-          <Link
+          <VideoCard
             key={video._id}
-            to={`/videos/${video._id}`}
-            style={{ textDecoration: "none" }}
-          >
-            <VideoCard video={video} onDelete={handleDeleteVideo} />
-          </Link>
+            video={video}
+            onDelete={handleDeleteVideo}
+            onUpdate={handleUpdateVideo}
+          />
         ))}
       </div>
-
     </div>
   );
 };
 
 export default Dashboard;
+
