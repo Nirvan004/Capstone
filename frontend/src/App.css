@@ -180,3 +180,23 @@ form button:disabled {
   background-color: #f9fafb;
   border-color: #9ca3af;
 }
+
+.video-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 0.5rem;
+}
+
+.delete-video-btn {
+  background: none;
+  border: none;
+  color: #b91c1c;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.delete-video-btn:hover {
+  text-decoration: underline;
+}

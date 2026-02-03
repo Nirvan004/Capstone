@@ -1,19 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import type { Video } from "../types/Video";
 
 interface Props {
   video: Video;
+  onDelete: (e: React.MouseEvent, videoId: string) => void;
 }
 
-const VideoCard: React.FC<Props> = ({ video }) => {
+const VideoCard: React.FC<Props> = ({ video, onDelete }) => {
   return (
-    <Link to={`/videos/${video._id}`} className="video-card-link">
       <div className="video-card">
-        <h3>{video.title}</h3>
+        <div className="video-card-header">
+          <h3>{video.title}</h3>
+
+          <button
+            className="delete-video-btn"
+            onClick={(e) => onDelete(e, video._id)}
+          >
+            Delete
+          </button>
+        </div>
         {video.description && <p>{video.description}</p>}
       </div>
-    </Link>
   );
 };
 

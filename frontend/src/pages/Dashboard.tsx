@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getVideos } from "../api/videoApi";
+import { getVideos, deleteVideo } from "../api/videoApi";
 import type { Video } from "../types/Video";
 import CreateVideoForm from "../components/CreateVideoForm";
+import VideoCard from "../components/VideoCard";
 
 const Dashboard: React.FC = () => {
   const [videos, setVideos] = useState<Video[]>([]);
@@ -22,6 +23,27 @@ const Dashboard: React.FC = () => {
     fetchVideos();
   }, []);
 
+  const handleDeleteVideo = async (
+  e: React.MouseEvent,
+  videoId: string
+) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  const confirmed = window.confirm(
+    "Are you sure you want to delete this video? This cannot be undone."
+  );
+
+  if (!confirmed) return;
+
+  try {
+    await deleteVideo(videoId);
+    setVideos((prev) => prev.filter((v) => v._id !== videoId));
+  } catch (err: any) {
+    alert(err.response?.data?.message || "Failed to delete video");
+  }
+};
+
   if (error) return <div className="error-message">{error}</div>;
 
   return (
@@ -34,14 +56,16 @@ const Dashboard: React.FC = () => {
       />
       <div className="video-grid">
         {videos.map((video) => (
-          <Link key={video._id} to={`/videos/${video._id}`} style={{ textDecoration: "none" }}>
-            <div className="video-card">
-              <h3>{video.title}</h3>
-              {video.description && <p>{video.description}</p>}
-            </div>
+          <Link
+            key={video._id}
+            to={`/videos/${video._id}`}
+            style={{ textDecoration: "none" }}
+          >
+            <VideoCard video={video} onDelete={handleDeleteVideo} />
           </Link>
         ))}
       </div>
+
     </div>
   );
 };
