@@ -186,6 +186,42 @@ Link to Frontend - https://capstone-1-4xtv.onrender.com/login
 
 Link to Backend -  https://capstone-dm8z.onrender.com/
 
+## Local Setup Instructions
+### Backend
+
+1.Clone the repository
+
+2.Navigate to the backend directory
+
+3.Install dependencies:
+
+npm install
+
+
+4.Create a .env file with:
+
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+PORT=5000
+
+
+5.Start the server:
+
+npm run dev
+
+### Frontend
+
+1.Navigate to the frontend directory
+
+2.Install dependencies:
+
+npm install
+
+
+3.Start the development server:
+
+npm run dev
+
 ## Thank Yous and Acknowledgements 
 -Previous Lessons 
 
@@ -204,4 +240,5 @@ Fully responsive frontend design
 
 Fully tested using Postman
 
-
+## Presentation Link 
+https://youtu.be/oV4hE1KuUec
